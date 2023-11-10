@@ -1,19 +1,30 @@
 package com.experis.course.springLaMiaPizzeriaCrud.model;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
+@Entity
 public class Pizza {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String pizzaName;
+    @Lob
     private String pizzaDescription;
+    @Lob
+    private String pizzaPicture;
+    private double pizzaPrice;
     private LocalDateTime createdAt;
+    public String getPizzaPicture() {
+        return pizzaPicture;
+    }
+
+    public void setPizzaPicture(String pizzaPicture) {
+        this.pizzaPicture = pizzaPicture;
+    }
+
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
@@ -47,14 +58,6 @@ public class Pizza {
         this.pizzaDescription = pizzaDescription;
     }
 
-    public String getPizzaImmage() {
-        return pizzaImmage;
-    }
-
-    public void setPizzaImmage(String pizzaImmage) {
-        this.pizzaImmage = pizzaImmage;
-    }
-
     public double getPizzaPrice() {
         return pizzaPrice;
     }
@@ -63,6 +66,5 @@ public class Pizza {
         this.pizzaPrice = pizzaPrice;
     }
 
-    private String pizzaImmage;
-    private double pizzaPrice;
+
 }
