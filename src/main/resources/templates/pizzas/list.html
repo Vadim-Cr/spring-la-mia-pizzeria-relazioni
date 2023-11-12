@@ -1,22 +1,44 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:insetrt="fragments/resources :: headResources(Pizza List)"></head>
+<head th:insert="fragments/resources :: headResources('Pizza List')"></head>
 <body>
 <div class="container">
+<nav th:replace="fragments/navbar :: topNavbar('pizza-stores')"></nav>
 <h1> QUESTE SONO LE PIZZE</h1>
 <hr>
-<table>
+<table class="table">
     <thead>
     <tr>
         <th>
             Pizza Name
         </th>
+        <th>
+            Pizza Description
+        </th>
+        <th>
+            Pizza Picture
+        </th>
+        <th>
+            Pizza Price
+        </th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="pizza : ${pizzaList}">
-        <td th:text="${pizza.pizzaName}"></td>
+    <tr th:each="pizza : ${pizzaList}" th:object="${pizza}">
+        <td th:text="*{pizzaName}"></td>
+        <td th:text="*{pizzaDescription}"></td>
+        <td th:text="*{pizzaPicture}"></td>
+        <td th:text="'€ ' + *{pizzaPrice}"></td>
     </tr>
+
+<!--    VERSIONE LUNGA-->
+<!--    <tr th:each="pizza : ${pizzaList}">/
+        <td th:text="${pizza.pizzaName}"></td>/
+        <td th:text="${pizza.pizzaDescription}"></td>/
+        <td th:text="${pizza.pizzaPicture}"></td>/
+        <td th:text="'€ ' + ${pizza.pizzaPrice}"></td>/
+    </tr>
+-->
     </tbody>
 </table>
 </div>

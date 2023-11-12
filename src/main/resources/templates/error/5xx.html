@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head><head th:insert="fragments/resources :: headResources('Error')"></head>
+<body>
+<div class="container">
+    <h1>        HA HA...    </h1>
+    <h1>        ERROR!    </h1>
+    <div th:insert="fragments/resources :: errorDetails"></div>
+    <a th:href="@{/}" class="btn btn-primary"> Get the hell out of here</a>
+</div>
+</body>
+</html>
