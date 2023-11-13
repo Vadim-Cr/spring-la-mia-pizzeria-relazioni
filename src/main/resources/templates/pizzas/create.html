@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/resources :: headResources('Pizza List')"></head>
+<body>
+<div class="container">
+    <nav th:replace="fragments/navbar :: topNavbar('pizza-stores')"></nav>
+    <h1>Create a new Pizza, Mamma Mia!</h1>
+    <hr>
+<!--    METTIAMO IL FORM PER CREARE LA PIZZA-->
+    <form
+        id="pizza-create"
+        method="POST"
+        th:action="@{/pizza-stores/create}"
+        th:object="${pizza}"
+        class="row"
+    >
+<!--        PIZZA NAME-->
+        <div class="mb-3 col-12">
+            <label for="pizzaName"Pizza Name</label>
+            <input type="text" class="form-control" id="pizzaName" placeholder="Enter Name" th:field="*{pizzaName}">
+        </div>
+<!--        PIZZA PICTURE-->
+        <div class="mb-3 col-6">
+            <label for="pizzaPicture">Choose Pizza Picture</label>
+            <input type="text" class="form-control" id="pizzaPicture" placeholder="Enter Picture URL" th:field="*{pizzaPicture}">
+        </div>
+<!--        PIZZA PRICE-->
+        <div class="mb-3 col-6">
+            <label for="pizzaPrice">Pizza Price</label>
+            <input type="number" class="form-control" id="pizzaPrice" placeholder="Enter Price" th:field="*{pizzaPrice}">
+        </div>
+<!--        PIZZA DESCRIPTION-->
+        <div class="mb-3 col-12">
+            <label for="pizzaDescription">Pizza Description</label>
+            <textarea class="form-control" id="pizzaDescription" placeholder="Enter Description" th:field="*{pizzaDescription}"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create Your Pizza</button>
+    </form>
+</div>
+</body>
+</html>

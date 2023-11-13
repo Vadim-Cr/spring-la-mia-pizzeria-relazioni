@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -35,6 +32,8 @@ public class PizzaController {
     }
 //        PASSO AL TEMPLATE LA LISTA DI PIZZE
         model.addAttribute("pizzaList", pizzaList);
+//        passo al template il valore aggiornato della strunga di ricerca per ricaricare l'input
+        model.addAttribute("searchKeyword", search.orElse(""));
         return "pizzas/list";
     }
 
@@ -52,4 +51,19 @@ public class PizzaController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "pizza with id " + id + " not found");
         }
     }
+//    Metodo per creare una nuova pizza
+    @GetMapping("/create")
+    public String create(Model model){
+        model.addAttribute("pizza", new Pizza());
+    return "pizzas/create";
+    }
+    @PostMapping("/create")
+    public String make(Pizza formPizza){
+//        Validare che i dati siano corretti
+
+//        Se i dati sono corretti salvo la pizza sul database
+        Pizza savedPizza = pizzaRepository.save(formPizza);
+        return "redirect:/pizza-stores/show/" + savedPizza.getId();
+    }
+
 }

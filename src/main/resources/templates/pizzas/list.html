@@ -7,11 +7,19 @@
 <div class="container d-flex justify-content-between m-2">
     <h1> MENU PIZZE</h1>
     <form class="form-inline my-2 my-lg-0 d-flex" th:action="@{/pizza-stores}" method="GET">
-        <input class="form-control mr-sm-2 mx-2" type="search" placeholder="Search by name or ingredient" aria-label="Search" name="search">
+        <input class="form-control mr-sm-2 mx-2"
+               type="search"
+               placeholder="Search by name or ingredient"
+               aria-label="Search"
+               name="search"
+               th:value="${searchKeyword}">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
 </div>
 <hr>
+    <div class="my-3">
+        <a th:href="@{pizza-stores/create}" class="btn btn-primary">Add a new Pizza</a>
+    </div>
 <table class="table">
     <thead>
     <tr>
