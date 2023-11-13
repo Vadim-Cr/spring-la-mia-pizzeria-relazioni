@@ -2,11 +2,23 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:insert="fragments/resources :: headResources('Pizza List')"></head>
 <body>
-    <div class="container">
+    <div class="container" th:object="${pizza}">
         <nav th:replace="fragments/navbar :: topNavbar('pizza-stores')"></nav>
-        <h1>
-            Pizza details
-        </h1>
+        <h1 th:text="*{pizzaName}"></h1>
+        <hr>
+        <dl>
+            <dt>Picture</dt>
+            <dd>
+                <img class="img-fluid w-25" th:src="*{pizzaPicture}"/>
+            </dd>
+            <dt>Pizza Description</dt>
+            <dd th:text="*{pizzaDescription}"></dd>
+            <dt>Price:</dt>
+            <dd th:text="*{pizzaPrice}"></dd>
+        </dl>
+        <div class="mt-2">
+            <a th:href="@{/pizza-stores}" class="btn btn-warning">Back to the Main Page</a>
+        </div>
     </div>
 </body>
 </html>

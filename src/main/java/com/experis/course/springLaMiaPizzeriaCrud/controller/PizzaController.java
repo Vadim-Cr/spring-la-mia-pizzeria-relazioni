@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -22,25 +23,33 @@ public class PizzaController {
     private PizzaRepository pizzaRepository;
 
     @GetMapping
-    public String index(Model model) {
+    public String index(@RequestParam(name = "search") Optional<String> search, Model model) {
+        List <Pizza> pizzaList;
+//        se il parametro di ricerca è presente filtro la lista di pizze
+    if (search.isPresent()){
+        pizzaList = pizzaRepository.findByPizzaNameContainingIgnoreCaseOrPizzaDescriptionContaining(search.get(), search.get());
+    } else {
+//        Altrimenti ti restituisco tutte le pizze non filtrate
 //        RECUPERA LA LISTA DI TUTTE LE PIZZE DAL DATABASE
-        List<Pizza> pizzaMenu = pizzaRepository.findAll();
-
+        pizzaList = pizzaRepository.findAll();
+    }
 //        PASSO AL TEMPLATE LA LISTA DI PIZZE
-        model.addAttribute("pizzaList", pizzaMenu);
+        model.addAttribute("pizzaList", pizzaList);
         return "pizzas/list";
     }
 
     //    scriviamo un metodo che mostri i dettagli di una pizza presa per "id"
     @GetMapping("/show/{id}")
-    public String show(@PathVariable Integer id) {
+    public String show(@PathVariable Integer id, Model model) {
         Optional<Pizza> result = pizzaRepository.findById(id);
 //       verifico che l'id della pizza sia presente
         if (result.isPresent()) {
+//            passo al template l'oggetto Pizza
+            model.addAttribute("pizza", result.get());
             return "pizzas/show";
         } else {
 //       se invece l'id non c'è sollevo un'eccezione
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "pizza with id " + id + " not found");
         }
     }
 }
