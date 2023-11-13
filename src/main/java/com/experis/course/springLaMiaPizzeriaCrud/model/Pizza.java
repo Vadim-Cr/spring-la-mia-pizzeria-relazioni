@@ -1,6 +1,7 @@
 package com.experis.course.springLaMiaPizzeriaCrud.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 import java.time.LocalDateTime;
 
@@ -10,11 +11,25 @@ public class Pizza {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotBlank
+    @Size(max=255)
+    @NotNull
     private String pizzaName;
+
+    @NotBlank
+    @Size(max=1000)
+    @NotNull
     @Lob
     private String pizzaDescription;
+
+    @NotBlank
+    @NotNull
     @Lob
     private String pizzaPicture;
+
+    @NotNull
+    @DecimalMin("2.0")
+    @DecimalMax("50.99")
     private double pizzaPrice;
     private LocalDateTime createdAt;
     public String getPizzaPicture() {

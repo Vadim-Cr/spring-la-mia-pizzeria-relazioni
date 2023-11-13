@@ -2,10 +2,12 @@ package com.experis.course.springLaMiaPizzeriaCrud.controller;
 
 import com.experis.course.springLaMiaPizzeriaCrud.model.Pizza;
 import com.experis.course.springLaMiaPizzeriaCrud.repository.PizzaRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -58,9 +60,12 @@ public class PizzaController {
     return "pizzas/create";
     }
     @PostMapping("/create")
-    public String make(Pizza formPizza){
+    public String make(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult){
 //        Validare che i dati siano corretti
-
+        if (bindingResult.hasErrors()){
+//            se ci sono errori devo ricaricare il form
+            return "pizzas/create";
+        }
 //        Se i dati sono corretti salvo la pizza sul database
         Pizza savedPizza = pizzaRepository.save(formPizza);
         return "redirect:/pizza-stores/show/" + savedPizza.getId();

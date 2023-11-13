@@ -15,16 +15,16 @@
         class="row"
     >
 <!--        PIZZA NAME-->
-        <div class="mb-3 col-12">
-            <label for="pizzaName"Pizza Name</label>
-            <input type="text" class="form-control" id="pizzaName" placeholder="Enter Name" th:field="*{pizzaName}">
+        <div class="mb-3 col-12" th:insert="fragments/components :: formField('text', 'Pizza Name', 'pizzaName')">
         </div>
 <!--        PIZZA PICTURE-->
-        <div class="mb-3 col-6">
+<!--        <div class="mb-3 col-12" th:insert="fragments/components :: formField('text', 'Pizza Picture', 'pizzaPicture')">-->
+            <div class="mb-3 col-6">
             <label for="pizzaPicture">Choose Pizza Picture</label>
             <input type="text" class="form-control" id="pizzaPicture" placeholder="Enter Picture URL" th:field="*{pizzaPicture}">
         </div>
 <!--        PIZZA PRICE-->
+<!--        <div class="mb-3 col-12" th:insert="fragments/components :: formField('number', 'Pizza Pirce', 'pizzaPrice')">-->
         <div class="mb-3 col-6">
             <label for="pizzaPrice">Pizza Price</label>
             <input type="number" class="form-control" id="pizzaPrice" placeholder="Enter Price" th:field="*{pizzaPrice}">
