@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/resources :: headResources('Edit Pizza')"></head>
+<body>
+<div class="container">
+    <nav th:replace="fragments/navbar :: topNavbar('pizza-stores')"></nav>
+    <h1>
+        EDIT BOOK
+    </h1>
+    <hr>
+    <form
+            id="pizza-edit"
+            method="POST"
+            th:action="@{/pizza-stores/edit/{id}(id=${pizza.id})}"
+            th:object="${pizza}"
+            class="row"
+    >
+        <!--        PIZZA NAME-->
+        <div class="mb-3 col-12" th:insert="fragments/components :: formField('text', 'Pizza Name', 'pizzaName')">
+        </div>
+
+        <!--        PIZZA PICTURE-->
+        <div class="mb-3 col-12" th:insert="fragments/components :: formField('text', 'Pizza Picture', 'pizzaPicture')"> </div>
+
+        <!--        PIZZA PRICE-->
+        <div class="mb-3 col-12" th:insert="fragments/components :: formField('number', 'Pizza Price', 'pizzaPrice')"></div>
+
+        <!--        PIZZA DESCRIPTION-->
+        <div class="mb-3 col-12" th:insert="fragments/components :: formFieldDescription('Pizza Description', 'pizzaDescription')"></div>
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary ">Modify Your Pizza</button>
+            <a th:href="@{/pizza-stores}" class="btn btn-primary">Cancel</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

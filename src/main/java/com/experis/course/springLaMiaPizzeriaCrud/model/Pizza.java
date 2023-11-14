@@ -14,6 +14,7 @@ public class Pizza {
     @NotBlank
     @Size(max=255)
     @NotNull
+    @Column(unique = true)
     private String pizzaName;
 
     @NotBlank

@@ -18,24 +18,32 @@
         <div class="mb-3 col-12" th:insert="fragments/components :: formField('text', 'Pizza Name', 'pizzaName')">
         </div>
 <!--        PIZZA PICTURE-->
-<!--        <div class="mb-3 col-12" th:insert="fragments/components :: formField('text', 'Pizza Picture', 'pizzaPicture')">-->
-            <div class="mb-3 col-6">
-            <label for="pizzaPicture">Choose Pizza Picture</label>
-            <input type="text" class="form-control" id="pizzaPicture" placeholder="Enter Picture URL" th:field="*{pizzaPicture}">
-        </div>
+        <div class="mb-3 col-12" th:insert="fragments/components :: formField('text', 'Pizza Picture', 'pizzaPicture')"> </div>
+<!--            <div class="mb-3 col-6 invalid-feedback">-->
+<!--            <label for="pizzaPicture">Choose Pizza Picture</label>-->
+<!--            <input type="text" class="form-control" id="pizzaPicture" placeholder="Enter Picture URL" th:field="*{pizzaPicture}">-->
+<!--        </div>-->
 <!--        PIZZA PRICE-->
-<!--        <div class="mb-3 col-12" th:insert="fragments/components :: formField('number', 'Pizza Pirce', 'pizzaPrice')">-->
-        <div class="mb-3 col-6">
-            <label for="pizzaPrice">Pizza Price</label>
-            <input type="number" class="form-control" id="pizzaPrice" placeholder="Enter Price" th:field="*{pizzaPrice}">
-        </div>
+        <div class="mb-3 col-12" th:insert="fragments/components :: formField('number', 'Pizza Price', 'pizzaPrice')"></div>
+
+<!--        <div class="mb-3 col-6 invalid-feedback">-->
+<!--            <label for="pizzaPrice">Pizza Price</label>-->
+<!--            <input type="number" class="form-control" id="pizzaPrice" placeholder="Enter Price" th:field="*{pizzaPrice}">-->
+<!--        </div>-->
 <!--        PIZZA DESCRIPTION-->
-        <div class="mb-3 col-12">
-            <label for="pizzaDescription">Pizza Description</label>
-            <textarea class="form-control" id="pizzaDescription" placeholder="Enter Description" th:field="*{pizzaDescription}"></textarea>
+            <div class="mb-3 col-12" th:insert="fragments/components :: formFieldDescription('Pizza Description', 'pizzaDescription')"></div>
+
+<!--        <div class="mb-3 col-12 invalid-feedback">-->
+<!--            <label for="pizzaDescription">Pizza Description</label>-->
+<!--            <textarea class="form-control" id="pizzaDescription" placeholder="Enter Description" th:field="*{pizzaDescription}"></textarea>-->
+<!--        </div>-->
+
+
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary">Create Your Pizza</button>
+            <a th:href="@{/pizza-stores}" class="btn btn-primary">Cancel</a>
         </div>
 
-        <button type="submit" class="btn btn-primary">Create Your Pizza</button>
     </form>
 </div>
 </body>

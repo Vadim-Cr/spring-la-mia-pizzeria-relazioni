@@ -71,4 +71,36 @@ public class PizzaController {
         return "redirect:/pizza-stores/show/" + savedPizza.getId();
     }
 
+//        Metodo che mostra la pagina di modifica
+
+
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable Integer id,Model model){
+//      Recupero i dettagli del libro
+        Optional<Pizza> result =pizzaRepository.findById(id);
+
+//      verifico che l'id della pizza sia presente
+        if (result.isPresent()) {
+
+//      passo al template l'oggetto Pizza
+            model.addAttribute("pizza", result.get());
+            return "pizzas/edit";
+        } else {
+//       se invece l'id non c'è sollevo un'eccezione
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "pizza with id " + id + " not found");
+        }
+    }
+//    Metodo che riceeve il submit del form e salva il libro
+
+    @PostMapping("/edit/{id}")
+    public String doEdit(@PathVariable Integer id, @Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult) {
+//        Validare che i dati siano corretti
+        if (bindingResult.hasErrors()) {
+//            se ci sono errori devo ricaricare il form
+            return "pizzas/create";
+        }
+//        Se i dati sono corretti salvo la pizza modificata sul database
+        Pizza savedPizza = pizzaRepository.save(formPizza);
+        return "redirect:/pizza-stores/show/" + savedPizza.getId();
+    }
 }

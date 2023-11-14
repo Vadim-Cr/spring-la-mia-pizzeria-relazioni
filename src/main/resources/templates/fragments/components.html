@@ -4,13 +4,24 @@
 <!--componente di field-->
 <th:block th:fragment="formField(type, label, fieldName)">
     <label th:for="${fieldName}" th:text="${label}">Default Text</label>
-    <input th:type="${type}" class="form-control" th:id="${fieldName}" placeholder="Enter Name" th:field="*{__${fieldName}__}" th:errorClass="is-invalid">
+    <input th:type="${type}" class="form-control" th:id="${fieldName}" th:placeholder="${fieldName}" th:field="*{__${fieldName}__}" th:errorClass="is-invalid">
     <div th:if="${#fields.hasErrors(fieldName)}" class="invalid-feedback">
         <ul>
             <li th:each="err : ${#fields.errors(fieldName)}" th:text="${err}"></li>
         </ul>
     </div>
 </th:block>
+
+<th:block th:fragment="formFieldDescription(label, fieldName)">
+    <label th:for="${fieldName}" th:text="${label}">Default Text</label>
+    <textarea class="form-control" th:id="${fieldName}" th:placeholder="${fieldName}" th:field="*{__${fieldName}__}" th:errorClass="is-invalid"></textarea>
+    <div th:if="${#fields.hasErrors(fieldName)}" class="invalid-feedback">
+        <ul>
+            <li th:each="err : ${#fields.errors(fieldName)}" th:text="${err}"></li>
+        </ul>
+    </div>
+</th:block>
+
 
 </body>
 </html>

@@ -16,8 +16,11 @@
             <dt>Price:</dt>
             <dd th:text="*{pizzaPrice}"></dd>
         </dl>
-        <div class="mt-2">
-            <a th:href="@{/pizza-stores}" class="btn btn-warning">Back to the Main Page</a>
+        <div class="mt-2 d-flex">
+            <a th:href="@{/pizza-stores}" class="btn btn-warning mx-3">Back to the Main Page</a>
+            <a th:href="@{/pizza-stores/edit/{id}(id=*{id})}" title="edit">
+                <i class="fa-solid fa-pen-nib text-warning icon-link icon-link-hover"></i>
+            </a>
         </div>
     </div>
 </body>
