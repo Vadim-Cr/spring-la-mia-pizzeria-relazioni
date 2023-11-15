@@ -103,4 +103,15 @@ public class PizzaController {
         Pizza savedPizza = pizzaRepository.save(formPizza);
         return "redirect:/pizza-stores/show/" + savedPizza.getId();
     }
+
+
+//    metodo per eliminare una pizza dal database
+
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable Integer id){
+        Pizza deletedPizza = pizzaRepository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND));
+//        se c'è lo eliminiamo
+        pizzaRepository.deleteById(id);
+        return "redirect:/pizza-stores";
+    }
 }

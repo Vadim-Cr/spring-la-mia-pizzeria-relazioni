@@ -57,6 +57,14 @@
                 <i class="fa-solid fa-pen-nib text-warning icon-link icon-link-hover"></i>
             </a>
         </td>
+        <td>
+            <form method="POST" th:action="@{pizza-stores/delete/{id}(id=${pizza.id})}">
+                <button type="submit" class="btn btn-warning">
+                    <i class="fa-solid fa-dumpster-fire"></i>
+                </button>
+            </form>
+        </td>
+
 
     </tr>
 
