@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Pizza {
@@ -33,8 +35,20 @@ public class Pizza {
     @DecimalMax("50.99")
     private double pizzaPrice;
     private LocalDateTime createdAt;
+
+
+    @OneToMany(mappedBy = "pizza")
+    private List<SpecialOffer> specials = new ArrayList<>();
     public String getPizzaPicture() {
         return pizzaPicture;
+    }
+
+    public List<SpecialOffer> getSpecials() {
+        return specials;
+    }
+
+    public void setSpecials(List<SpecialOffer> specials) {
+        this.specials = specials;
     }
 
     public void setPizzaPicture(String pizzaPicture) {
