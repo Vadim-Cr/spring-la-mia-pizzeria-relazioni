@@ -42,9 +42,14 @@
                 </thead>
                 <tbody>
                    <tr th:each="special : *{specials}" th:object="${special}">
-                       <td th:text="*{stardDate}"></td>
-                       <td th:text="*{endDate}"></td>
+                       <td th:text="*{startDate}"></td>
+                       <td th:text="*{expireDate}"></td>
                        <td th:text="*{offerName}"></td>
+                       <td>
+                           <a th:href="@{/specials/edit/{id}(id=${special.id})}" title="edit">
+                               <i class="fa-solid fa-pen-nib text-warning icon-link icon-link-hover"></i>
+                           </a>
+                       </td>
                    </tr>
                 </tbody>
             </table>

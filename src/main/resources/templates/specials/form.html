@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:with="isEdit=${offer?.id != null}">
+<head th:insert="fragments/resources :: headResources(${isEdit ? 'Edit Offer' : 'Create Offer'})"></head>
+<body>
+<div class="container">
+    <nav th:replace="fragments/navbar :: topNavbar('pizza-stores')"></nav>
+    <h1 th:text="${isEdit ? 'Edit Offer' : 'Create Special Offer'}"></h1>
+<!--    <h2 class="text-muted" th:text="${offer.pizza.pizzaName}"></h2>-->
+    <h2 class="text-muted" th:text="${offer.pizza != null ? offer.pizza.pizzaName : 'No Pizza Selected'}"></h2>
+
+
+    <form
+    th:with="actionUrl=${isEdit ? '/specials/edit/'+offer.id : '/specials/create'}"
+    id="specialOffer-form"
+    th:action="@{${actionUrl}}"
+    method="POST"
+    th:object="${offer}"
+    class="row"
+    >
+
+<!--        CAMPO HIDDEN -->
+
+        <input type="hidden" th:field="*{pizza}" name="pizzaId">
+        <div class="mb-3 col-12" th:insert="fragments/components :: formField('date', 'Start Date', 'startDate')"></div>
+        <div class="mb-3 col-12" th:insert="fragments/components :: formField('date', 'Expire Date', 'expireDate')"></div>
+<!--        <div class="mb-3 col-12" th:insert="fragments/components :: formField('date', 'End Date', 'endDate')"></div>-->
+        <div class="mb-3 col-12" th:insert="fragments/components :: formFieldDescription('Special Offer Name', 'offerName')"></div>
+
+        <!-- actions -->
+        <div class="col-12">
+            <button class="btn btn-primary" type="submit">
+                Save</button>
+            <a th:href="@{/pizza-stores/show/{pizzaId}(pizzaId=*{pizza.id})}" class="btn btn-primary">Cancel</a>
+        </div>
+    </form>
+</div>
+</body>

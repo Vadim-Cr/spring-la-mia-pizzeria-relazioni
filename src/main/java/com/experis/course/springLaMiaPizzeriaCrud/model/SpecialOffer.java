@@ -1,6 +1,7 @@
 package com.experis.course.springLaMiaPizzeriaCrud.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.boot.autoconfigure.web.WebProperties;
 
 import java.time.LocalDate;
@@ -11,9 +12,20 @@ public class SpecialOffer {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Integer id;
+
+    @NotNull
     private LocalDate startDate;
-    private LocalDate endDate;
+
+//    @NotNull
+//    private LocalDate endDate;
+
+    @NotNull
+    private LocalDate expireDate;
+
+
     private String offerName;
+
+    @NotNull
     @ManyToOne
     private Pizza pizza;
 
@@ -24,6 +36,15 @@ public class SpecialOffer {
     public void setPizza(Pizza pizza) {
         this.pizza = pizza;
     }
+
+    public LocalDate getExpireDate() {
+        return expireDate;
+    }
+
+    public void setExpireDate(LocalDate expireDate) {
+        this.expireDate = expireDate;
+    }
+
 
     public Integer getId() {
         return id;
@@ -41,13 +62,13 @@ public class SpecialOffer {
         this.startDate = startDate;
     }
 
-    public LocalDate getEndDate() {
-        return endDate;
-    }
+//    public LocalDate getEndDate() {
+//        return endDate;
+//    }
 
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
+//    public void setEndDate(LocalDate endDate) {
+//        this.endDate = endDate;
+//    }
 
     public String getOfferName() {
         return offerName;
